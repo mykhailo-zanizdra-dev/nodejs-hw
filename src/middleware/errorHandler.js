@@ -1,20 +1,20 @@
 import { HttpError } from 'http-errors';
 
 const errorHandler = (err, req, res, next) => {
+  const isProd = process.env.NODE_ENV === 'production';
+
   if (err instanceof HttpError) {
-    return res.status(err.statusCode).json({
-      status: err.statusCode,
-      message: err.name,
-      error: err.message,
+    return res.status(err.status).json({
+      status: err.status,
+      message: err.message || err.name,
+      error: err,
     });
   }
 
-  const statusCode = err.statusCode ?? 500;
-
-  res.status(statusCode).json({
-    status: statusCode,
-    message: 'Internal server error',
-    error: err.message,
+  res.status(500).json({
+    message: isProd
+      ? 'Something went wrong. Please try again later.'
+      : err.message,
   });
 };
 
