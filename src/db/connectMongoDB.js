@@ -3,12 +3,7 @@ import 'dotenv/config';
 
 export const connectMongoDB = async () => {
   try {
-    const user = process.env.DB_USER;
-    const password = process.env.DB_PASSWORD;
-    const host = process.env.DB_HOST;
-    const dbName = process.env.DB_NAME;
-
-    const mongoUrl = `mongodb+srv://${user}:${password}@${host}/${dbName}?appName=Cluster0`;
+    const mongoUrl = process.env.MONGO_URL;
 
     await mongoose.connect(mongoUrl);
     await mongoose?.connection?.db?.admin().command({ ping: 1 });

@@ -1,13 +1,11 @@
 import { HttpError } from 'http-errors';
 
-const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, next) => {
   const isProd = process.env.NODE_ENV === 'production';
 
   if (err instanceof HttpError) {
     return res.status(err.status).json({
-      status: err.status,
       message: err.message || err.name,
-      error: err,
     });
   }
 
@@ -17,5 +15,3 @@ const errorHandler = (err, req, res, next) => {
       : err.message,
   });
 };
-
-export default errorHandler;
