@@ -7,8 +7,8 @@ export const getAllNotes = async (req, res) => {
 
   const notesQuery = Note.find();
   const [totalItems, notes] = await Promise.all([
-    notesQuery.skip(skip).limit(perPage),
     notesQuery.clone().countDocuments(),
+    notesQuery.skip(skip).limit(perPage),
   ]);
   const totalPages = Math.ceil(totalItems / perPage);
 
