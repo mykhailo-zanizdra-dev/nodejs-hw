@@ -10,7 +10,7 @@ export const getAllNotesSchema = {
     page: Joi.number().min(1).default(1),
     perPage: Joi.number().min(5).max(20).default(10),
     tag: Joi.string().valid(...TAGS),
-    search: Joi.string().min(3).max(50),
+    search: Joi.string(),
   }),
 };
 

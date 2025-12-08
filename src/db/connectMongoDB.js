@@ -1,5 +1,6 @@
 import mongoose, { MongooseError } from 'mongoose';
 import 'dotenv/config';
+import { Note } from '../models/note.js';
 
 export const connectMongoDB = async () => {
   try {
@@ -9,6 +10,8 @@ export const connectMongoDB = async () => {
     await mongoose?.connection?.db?.admin().command({ ping: 1 });
 
     console.log('✅ MongoDB connection established successfully');
+    await Note.syncIndexes();
+    console.log('Indexes synced successfully');
   } catch (error) {
     const errorMessage =
       error instanceof MongooseError
