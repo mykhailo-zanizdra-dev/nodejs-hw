@@ -115,7 +115,7 @@ export const requestResetEmail = async (req, res) => {
   const template = handlebars.compile(templateSource);
   const html = template({
     name: user.username,
-    link: `${process.env.FRONTEND_DOMAIN}/auth/reset-password?token=${resetToken}`,
+    link: `${process.env.FRONTEND_DOMAIN}/reset-password?token=${resetToken}`,
   });
 
   try {
@@ -158,6 +158,6 @@ export const resetPassword = async (req, res) => {
   await Session.deleteMany({ userId: user._id });
 
   res.status(200).json({
-    message: 'Password reset email sent successfully',
+    message: 'Password was reset successfully',
   });
 };
