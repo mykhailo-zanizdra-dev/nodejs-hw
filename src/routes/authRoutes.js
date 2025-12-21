@@ -26,6 +26,6 @@ router.post(
   celebrate(requestResetEmailSchema),
   requestResetEmail,
 );
-router.post('/reset-password', celebrate(resetPasswordSchema), resetPassword);
+router.post('/auth/reset-password', celebrate(resetPasswordSchema), resetPassword);
 
 export default router;
